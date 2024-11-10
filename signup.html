@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign Up</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('.jpeg'); 
+            background-size: cover;
+            background-position: center;
+        }
+
+        .signup-container {
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 300px; 
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px; 
+            border: 1px solid #ccc; 
+        }
+
+        button {
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border-radius: 5px; /* Rounded corners for buttons */
+            border:none;
+        }
+
+        button:hover {
+            background-color: #333; /* Darker shade on hover */
+        }
+
+        .password-container {
+            position: relative; /* Position relative for icon placement */
+        }
+
+        .password-container i {
+            position: absolute; /* Position icon inside input field */
+            right: 10px; /* Position it on the right inside the box */
+            top: calc(50% - 8px); /* Center vertically */
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .error-message {
+            color: red; 
+            display: none; 
+            text-align: center; 
+            margin-top: 5px; /* Adjust margin for better spacing */
+        }
+
+        .captcha-container {
+          margin-top: 10px;
+          display:flex; 
+          justify-content:center; 
+          align-items:center; 
+          gap:.5rem; 
+          margin-bottom:.5rem; 
+        }
+
+        .refresh-button {
+          font-size: 12px; /* Smaller font size for the refresh button */
+          padding: 5px; /* Smaller padding */
+        }
+    </style>
+
+    <script>
+        function generateCaptcha() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; // Character set
+            let captcha = '';
+            
+            // Generate a random CAPTCHA of length 6
+            for (let i = 0; i < 6; i++) {
+                const randomIndex = Math.floor(Math.random() * characters.length);
+                captcha += characters[randomIndex];
+            }
+            
+            const captchaContainer = document.getElementById("captcha");
+            captchaContainer.innerText = captcha; // Display it in the captcha container
+        }
+
+        function handleSignup(event) {
+          event.preventDefault(); // Prevent default form submission
+
+          const firstNameInput = document.getElementById("first-name").value;
+          const lastNameInput = document.getElementById("last-name").value;
+          const emailInput = document.getElementById("email").value;
+          const phoneInput = document.getElementById("phone").value;
+          const passwordInput = document.getElementById("password").value;
+          const confirmPasswordInput = document.getElementById("confirm-password").value;
+
+          const captchaInput = document.getElementById("captcha-input").value;
+
+          // Check CAPTCHA
+          if (captchaInput !== document.getElementById("captcha").innerText) {
+              alert("Incorrect CAPTCHA. Please try again.");
+              return; // Stop the signup process if CAPTCHA is incorrect
+          }
+
+          // Check if passwords match
+          if (passwordInput !== confirmPasswordInput) {
+              document.getElementById('error-message').innerText = "Passwords do not match.";
+              document.getElementById('error-message').style.display = 'block'; // Show error message
+              return; // Stop the signup process if passwords do not match
+          } else {
+              document.getElementById('error-message').style.display = 'none'; // Hide error message if passwords match
+          }
+
+          alert("Sign up successful!"); // Placeholder for successful signup logic
+          window.location.href = "index.html"; // Redirect back to login page after signup
+      }
+
+      function togglePasswordVisibility(inputId, iconId) {
+          const passwordInput = document.getElementById(inputId);
+          const toggleIcon = document.getElementById(iconId);
+          const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+          passwordInput.setAttribute('type', type);
+          toggleIcon.classList.toggle('fa-eye'); // Toggle between eye and eye-slash icon
+          toggleIcon.classList.toggle('fa-eye-slash');
+      }
+
+      window.onload = generateCaptcha; // Generate CAPTCHA on page load
+    </script>
+</head>
+<body>
+
+<div class="signup-container">
+    <h2>Sign Up</h2>
+    <form onsubmit="handleSignup(event)">
+        <input type="text" id="first-name" placeholder="First Name" required />
+        <input type="text" id="last-name" placeholder="Last Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="text" id="phone" placeholder="Phone Number" required />
+        
+        <div class="password-container">
+            <input type="password" id="password" placeholder="Password" required />
+            <i class="fas fa-eye-slash" id="togglePassword1" onclick="togglePasswordVisibility('password', 'togglePassword1')" style="cursor:pointer;"></i> <!-- Eye Slash Icon -->
+        </div>
+
+        <div class="password-container">
+            <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+            <i class="fas fa-eye-slash" id="togglePassword2" onclick="togglePasswordVisibility('confirm-password', 'togglePassword2')" style="cursor:pointer;"></i> <!-- Eye Slash Icon -->
+        </div>
+
+        <!-- CAPTCHA Section -->
+        <div class="captcha-container">
+           <span id="captcha"></span> <!-- Display CAPTCHA here -->
+           <button type="" onclick='generateCaptcha(); return false;' class='refresh-button'>Refresh</button> <!-- Smaller Refresh button -->
+       </div>
+
+       <input type='text' id='captcha-input' placeholder='Enter CAPTCHA' required /> <!-- Input for CAPTCHA -->
+
+       <button type='submit'>Continue</button> <!-- Sign Up Button -->
+       <div class='error-message' id='error-message'></div> <!-- Error Message for Password Mismatch -->
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn-like App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0; /* Remove padding to utilize full width */
+            background-color: #f4f4f4; /* Light background for contrast */
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Arrange items in a column */
+            align-items: center; /* Center items horizontally */
+            justify-content: flex-start; /* Start from the top */
+            height: 100vh; /* Full viewport height */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+
+        h1 {
+            margin-bottom: 40px; /* Increased space below the header */
+            text-align: center; /* Center text */
+            padding: 30px 20px; /* Increased padding for a wider appearance */
+            font-size: 48px; /* Increased font size for visibility */
+            border-radius: 10px; /* Slightly rounded corners for the header */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
+        }
+
+        .container {
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Arrange boxes in a column */
+            align-items: center; /* Center boxes horizontally */
+            width: 100%; /* Full width of the container */
+            max-height: calc(100vh - 150px); /* Limit height to allow scrolling below header */
+            overflow-y: auto; /* Enable vertical scrolling within the container */
+        }
+
+        .box {
+            width: 90%; /* Set box width to cover most of the screen width */
+            max-width: 600px; /* Maximum width for larger screens */
+            height: 200px; /* Increased height for the boxes */
+            margin: 20px 0; /* Increased space between boxes vertically */
+            background-color: lightblue; /* Background color for visibility */
+            display: none; /* Initially hide the boxes */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            border-radius: 10px; /* Slightly more rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
+            opacity: 0; /* Start with opacity 0 for fade effect */
+            transition: opacity 0.5s ease, transform 0.2s; /* Smooth transition for opacity and scale */
+            font-size: 32px; /* Increased font size inside boxes for visibility */
+        }
+
+        .box.show {
+            display: flex; /* Change display to flex to show the box */
+            opacity: 1; /* Fade in effect */
+        }
+
+        .box:hover {
+            transform: scale(1.05); /* Scale up on hover for a more pronounced effect */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>WELCOME TO CAREER PATH</h1>
+    </header>
+    <main class="container">
+        <div class="box">Goals</div>
+        <div class="box">Skills</div>
+        <div class="box">Calendar</div>
+        <div class="box">Road Map</div> <!-- Road Map Box -->
+    </main>
+
+    <script>
+        // Function to show boxes one by one
+        function showBoxes() {
+            const boxes = document.querySelectorAll('.box');
+            boxes.forEach((box, index) => {
+                setTimeout(() => {
+                    box.classList.add('show'); // Add 'show' class to trigger CSS transitions
+                }, index * 1000); // Delay based on index (1 second per box)
+            });
+        }
+
+        // Call the function to start showing boxes
+        showBoxes();
+    </script>
+</body>
+</html>

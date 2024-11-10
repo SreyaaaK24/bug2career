@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BUG2CAREER</title> <!-- Updated title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" rel="stylesheet"> <!-- Bootstrap Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Samsung+Sans:wght@400&display=swap" rel="stylesheet"> <!-- Link to Samsung Sans -->
+    <script>
+        let correctEmail = "abc@gmail.com"; 
+        let correctPassword = "lolip@123"; 
+
+        function handleLogin(event) {
+            event.preventDefault(); 
+            
+            // Get input values
+            const emailInput = document.getElementById('email').value;
+            const passwordInput = document.getElementById('password').value;
+
+            // Show loading overlaya
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            // Simulating login validation
+            setTimeout(function() {
+                if (emailInput === correctEmail && passwordInput === correctPassword) {
+                    document.getElementById('loadingOverlay').style.display = 'none'; 
+                    window.location.href = "dashboard.html"; 
+                } else {
+                    document.getElementById('loadingOverlay').style.display = 'none'; 
+                    document.getElementById('error-message').innerText = "Incorrect email or password. Please try again.";
+                    document.getElementById('error-message').style.display = 'block'; 
+                }
+            }, 2000); 
+        }
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePassword');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            toggleIcon.classList.toggle('bi-eye'); // Toggle between eye and eye-slash icon
+            toggleIcon.classList.toggle('bi-eye-slash');
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="header-container">
+            <h2 style="font-family: 'Samsung Sans', sans-serif; margin: 0;">Welcome to</h2> <!-- Apply Samsung Sans font -->
+            <img src="logo .png" alt="Logo" class="logo"> <!-- Updated logo source -->
+        </div>
+        <form onsubmit="handleLogin(event)">
+            <input type="text" id="email" name="email" placeholder="Email or Phone Number" required aria-label="Email or Phone Number" style="margin-top: 20px;"> 
+            <div class="password-container">
+                <input type="password" id="password" name="password" placeholder="Password" required aria-label="Password">
+                <i class="bi bi-eye-slash" id="togglePassword" onclick="togglePassword()" style="cursor:pointer;"></i> <!-- Eye Slash Icon -->
+            </div>
+            <button type="submit">Continue</button>
+        </form>
+
+        <!-- Error Message -->
+        <div id="error-message" style="color: black; display: none; text-align: center; margin-top: 10px;"></div>
+
+        <p>Don't have an account? <a href="signup.html" style="color: red;">Sign up</a></p> <!-- Link to Sign Up Page -->
+
+        <!-- Continue with Google Section -->
+        <div class="google-signin">
+            <p style="margin: 10px 0;">or</p>
+            <button class="google-button">
+                <img src="google-logo.png" alt="Google Logo" style="width: 20px; margin-right: 8px;"> Continue with Google
+            </button>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class='loading-overlay' id='loadingOverlay'>
+            <div class='loader'></div> <!-- Loader animation -->
+            <p>Loading...</p> <!-- Optional loading text -->
+        </div>
+    </div>
+
+     <!-- Styles for Loading Overlay -->
+     <style>
+         .login-container {
+             width: 350px; /* Set a fixed width for the container */
+             padding: 40px; /* Increased padding for more height */
+             background-color: rgba(255, 255, 255, 0.4); /* Increased transparency */
+             border-radius: 20px; /* More rounded corners */
+             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow for highlighting */
+             text-align: center; /* Center text inside the container */
+             min-height: 400px; /* Set a minimum height for the container */
+         }
+
+         .header-container {
+             display: flex; /* Use flexbox for horizontal alignment */
+             flex-direction: column; /* Stack items vertically */
+             align-items: center; /* Center items horizontally */
+         }
+
+         .logo {
+             width: 120px; /* Set a larger size for the logo */
+             margin-top: 5px; /* Space above the logo */
+         }
+
+         input[type=text], input[type=password] {
+             width: calc(100% - 40px); /* Adjust width for padding */
+             padding: 10px;
+             margin-bottom: 15px;
+             border: 1px solid #ccc;
+             border-radius: 20px; /* More rounded edges */
+             transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transition for focus effect */
+         }
+
+         input[type=text]:focus,
+         input[type=password]:focus {
+             border-color:#133B5C; /* Change border color on focus */
+             box-shadow: 0 0 5px rgba(66, 133, 244, 0.5); /* Add shadow on focus */
+         }
+
+         .password-container {
+             position: relative; /* Position relative for icon placement */
+         }
+
+         .password-container i {
+             position: absolute; /* Position icon inside input field */
+             right: calc(10px + 8px); /* Move it to the right by an additional ~0.8 cm (8 pixels) */
+             top: calc(50% - 8px); /* Keep it slightly higher (8 pixels) than center (~0.5 cm) */
+             transform: translateY(-50%); /* Center vertically based on adjusted position */
+         }
+
+         .login-container button {
+             background-color: #133B5C; /* Change button color */
+             color: white;
+             padding: 10px;
+             border: none;
+             border-radius: 20px; /* Rounded corners for button */
+             cursor: pointer;
+             width: 100%;
+         }
+
+         .login-container button:hover {
+             background-color: #133B5C; /* Change hover color */
+         }
+
+         .google-signin {
+             margin-top: 20px; /* Add some space above this section */
+         }
+
+         .google-button {
+             display: inline-flex;
+             align-items: center;
+             justify-content: center;
+             background-color: #133B5C; /* Set background color to black */
+             color: white; /* Text color white */
+             padding: 10px;
+             border-radius: 20px;
+             border: none;
+             cursor: pointer;
+             width: calc(100% - 40px); /* Match input width minus padding */
+         }
+
+         .google-button:hover {
+             background-color: #133B5C; /* Darker shade of black on hover */
+         }
+
+         .login-container p {
+             margin-top: 15px;
+         }
+
+         .login-container a {
+             color: red; /* Change link color to red */
+         }
+
+         .login-container a:hover {
+             color: #133B5C; /* Change hover color */
+         }
+
+         /* Loading overlay styles */
+         .loading-overlay {
+            position: absolute; /* Position overlay over login container */
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+            display: none; /* Hidden by default */
+            justify-content: center; 
+            align-items: center; 
+        }
+
+        .loader {
+           border: 8px solid #f3f3f3; /* Light grey */
+           border-top: 8px solid blueviolet; /* Blueviolet */
+           border-radius: 50%;
+           width: 40px; 
+           height: 40px; 
+           animation: spin 1s linear infinite; /* Spin animation */
+        }
+
+        @keyframes spin {
+           from { transform: rotate(0deg); }
+           to { transform: rotate(360deg); }
+        }
+     </style>
+</body>
+</html>

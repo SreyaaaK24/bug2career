@@ -1,0 +1,108 @@
+body {
+    font-family: 'Open Sans', sans-serif; /* Change font family */
+    background-image: url('.jpeg'); /* Change background image */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    min-height: 100vh;
+    margin: 0;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.4); /* Increased transparency */
+    padding: 30px;
+    border-radius: 20px; /* More rounded corners */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Enhanced shadow for highlighting */
+    width: 300px; /* Adjust as needed */
+    text-align: center; /* Center text inside the container */
+}
+
+.login-container h2 {
+    margin-top: -10px;   /* Adjust to move it closer to the logo if needed*/
+    margin-bottom: -10px;   /* Adjust to move it closer to the logo if needed*/
+}
+
+.login-container img {
+    width: 150px; /* Set a larger size for the logo */
+    margin-bottom: -10px;   /* Adjust to move it closer to the welcome text if needed*/
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: calc(100% - 40px); /* Adjust width for padding */
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius :20px ; 
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus {
+    border-color :blueviolet ; 
+}
+
+.password-container {
+    position :relative ; 
+}
+
+.password-container i {
+   position :absolute ; 
+   right :calc(10px +8px) ; 
+   top :calc(50%-8px) ; 
+   transform :translateY(-50%) ; 
+}
+
+.login-container button {
+   background-color :blueviolet ; 
+   color :white ;
+   padding :10px ;
+   border:none ; 
+   border-radius :20px ; 
+   cursor:pointer ;
+   width :100% ; 
+}
+
+.login-container button:hover { 
+   background-color :darkviolet ; 
+}
+
+.login-container p { 
+   margin-top :15px ; 
+}
+
+.login-container a { 
+   color :blueviolet ; 
+}
+
+.login-container a:hover { 
+   color :darkviolet ;
+}
+
+/* Loading overlay styles */
+
+.loading-overlay {  
+   position:absolute ;  
+   top :0 ;  
+   left :0 ;  
+   right :0 ;  
+   bottom :0 ;  
+   background-color :rgba(255,255,255,.8);  
+   display:none ;  
+   justify-content:center ;  
+   align-items:center ;
+}
+
+.loader {  
+   border :8px solid #f3f3f3 ;  
+   border-top :8px solid blueviolet ;  
+   border-radius :50% ;  
+   width :40px ;  
+   height :40px ;  
+   animation :spin1s linear infinite ;
+}
+
+@keyframes spin {  
+   from { transform :rotate(0deg); }  
+   to { transform :rotate(360deg); }  
+}
